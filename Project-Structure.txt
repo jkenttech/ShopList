@@ -2,18 +2,30 @@ ShopList/
 |--API/
 |  |--appSettings.json
 |  |--Controllers/
+|  |  |--DashboardController.cs
+|  |  |--ListController.cs
+|  |  |--LoginController.cs
+|  |  |--ProfileController.cs
+|  |  |--RegistrationController.cs
+|  |  |--RootController.cs
 |  |--DAOs/
+|  |  |--ListDAO.cs
+|  |  |--ListItem.cs
 |  |--endpoints.txt
 |  |--functions.txt
 |  |--Interfaces/
+|  |  |--AccountInterface.cs
+|  |  |--HisotryInterface.cs
 |  |--Migrations/
 |  |--Models/
 |  |  |--List.cs
 |  |  |--ListItem.cs
+|  |  |--ListItemHistory.cs
 |  |  |--Login.cs
 |  |  |--Store.cs
+|  |  |--StoreHistory.cs
 |  |  |--User.cs
-|  |--Properties/
+|  |  |--UserHistory.cs
 |  |--Program.cs
 |  |--README.md
 |  |--Tests/
