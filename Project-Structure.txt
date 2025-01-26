@@ -1,0 +1,23 @@
+ShopList/
+|--API/
+|  |--appSettings.json
+|  |--Controllers/
+|  |--DAOs/
+|  |--endpoints.txt
+|  |--functions.txt
+|  |--Interfaces/
+|  |--Migrations/
+|  |--Models/
+|  |  |--List.cs
+|  |  |--ListItem.cs
+|  |  |--Login.cs
+|  |  |--Store.cs
+|  |  |--User.cs
+|  |--Properties/
+|  |--Program.cs
+|  |--README.md
+|  |--Tests/
+|--FrontEnd/
+|  |--App.ts
+|  |--components/
+|  |--hooks/
