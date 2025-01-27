@@ -10,7 +10,8 @@ ShopList/
 |  |  |--RootController.cs
 |  |--DAOs/
 |  |  |--ListDAO.cs
-|  |  |--ListItem.cs
+|  |  |--ListItemDAO.cs
+|  |  |--LoginDAO.cs
 |  |--endpoints.txt
 |  |--functions.txt
 |  |--Interfaces/
