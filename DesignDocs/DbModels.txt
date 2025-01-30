@@ -3,6 +3,38 @@ Login {
     Passwordhash : String
 }
 
-User {
-    
+LoginHistory {
+    Id : Int (PK)
+    DateTime : DateTime
+    PreviousField : String
+    PreviousValue : String
 }
+
+User {
+    Email : String (PK)
+    LoginId : Int (FK Login.Id)
+    FirstName : String
+    Surname : String
+    ProfilePic : String
+}
+
+List {
+    Id : Int (PK)
+    OwnerId : Int (FK User.LoginId)
+    Description : String
+}
+
+SharedList {
+    Id : Int (PK)
+    ListId : Int (FK List.OwnerId)
+    SharedUserId : Int (FK User.LoginId)
+}
+
+ListItem {
+    Id : Int (PK)
+    ListId : Int (FK List.Id)
+    DateAdded : DateTime
+    DateModified : DateTime
+    Description : String
+}
+
