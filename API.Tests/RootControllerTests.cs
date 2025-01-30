@@ -34,7 +34,47 @@ public class RootControllerTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task Get_EndpointsReturn404(string url)
     {
         var response = await _client.GetAsync(url);
-
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/Index")]
+    [InlineData("/About")]
+    [InlineData("/Privacy")]
+    [InlineData("/Contact")]
+    [InlineData("/404")]
+    public async Task Post_EndpointsMethodNotAllowed(string url)
+    {
+        HttpContent? content = null;
+        var response = await _client.PostAsync(url, content);
+        Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
+    }
+
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/Index")]
+    [InlineData("/About")]
+    [InlineData("/Privacy")]
+    [InlineData("/Contact")]
+    [InlineData("/404")]
+    public async Task Delete_EndpointsMethodNotAllowed(string url)
+    {
+        var response = await _client.DeleteAsync(url);
+        Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
+    }
+
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/Index")]
+    [InlineData("/About")]
+    [InlineData("/Privacy")]
+    [InlineData("/Contact")]
+    [InlineData("/404")]
+    public async Task Put_EndpointsMethodNotAllowed(string url)
+    {
+        HttpContent? content = null;
+        var response = await _client.PutAsync(url, content);
+        Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
     }
 }

@@ -9,7 +9,11 @@ public class RootController : Controller
     public JsonResult Index()
     {
         Response.StatusCode = 200;
-	    return Json("RootController.Index()");
+        var jsonData = new {
+            Method = "[GET]",
+            Function = "RootController.Index()"
+        };
+	    return Json(jsonData);
     }
 
     [HttpGet]
@@ -17,7 +21,11 @@ public class RootController : Controller
     public JsonResult About()
     {
         Response.StatusCode = 200;
-	    return Json("RootController.About()");
+        var jsonData = new {
+            Method = "[GET]",
+            Function = "RootController.About()"
+        };
+	    return Json(jsonData);
     }
 
     [HttpGet]
@@ -25,7 +33,11 @@ public class RootController : Controller
     public JsonResult Privacy()
     {
         Response.StatusCode = 200;
-	    return Json("RootController.Privacy()");
+        var jsonData = new {
+            Method = "[GET]",
+            Function = "RootController.Privacy()"
+        };
+	    return Json(jsonData);
     }
 
     [HttpGet]
@@ -33,7 +45,11 @@ public class RootController : Controller
     public JsonResult Contact()
     {
         Response.StatusCode = 200;
-	    return Json("RootController.Contact()");
+        var jsonData = new {
+            Method = "[GET]",
+            Function = "RootController.Contact()"
+        };
+	    return Json(jsonData);
     }
 
     [HttpGet]
@@ -41,6 +57,10 @@ public class RootController : Controller
     public JsonResult FourOFour()
     {
         Response.StatusCode = 404;
-	    return Json("RootController.Contact()");
+        var jsonData = new {
+            Method = "[GET]",
+            Function = "RootController.FourOFour()"
+        };
+	    return Json(jsonData);
     }
 }
