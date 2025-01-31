@@ -19,12 +19,11 @@ ShopList/
 |  |  |--HisotryInterface.cs
 |  |--Migrations/
 |  |--Models/
+|  |  |--History.cs
 |  |  |--List.cs
 |  |  |--ListItem.cs
-|  |  |--ListItemHistory.cs
 |  |  |--Login.cs
 |  |  |--Store.cs
-|  |  |--StoreHistory.cs
 |  |  |--User.cs
 |  |  |--UserHistory.cs
 |  |--Program.cs

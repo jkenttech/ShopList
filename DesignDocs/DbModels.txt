@@ -5,7 +5,8 @@ Login {
 
 LoginHistory {
     Id : Int (PK)
-    DateTime : DateTime
+    LoginId : Int (FK Login.Id)
+    UpdateTime : DateTime
     PreviousField : String
     PreviousValue : String
 }
