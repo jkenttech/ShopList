@@ -7,6 +7,8 @@ public class List
     public int OwnerId { get; set; }
     
     public int? SharedId { get; set; }
+    
+    public int? ShopId { get; set; }
 
     public DateTime DateAdded { get; }
 
