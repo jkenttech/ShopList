@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net;
-
 namespace API.Tests;
 
 public class RootControllerTests : IClassFixture<WebApplicationFactory<Program>>
