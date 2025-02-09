@@ -1,8 +1,11 @@
+using API.Handlers;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddSingleton<JwtTokenHandler>();
 
 WebApplication app = builder.Build();
 

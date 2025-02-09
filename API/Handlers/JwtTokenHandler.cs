@@ -19,7 +19,7 @@ internal sealed class JwtTokenHandler(IConfiguration config)
             [
                 new Claim(JwtRegisteredClaimNames.Email, login.Email)
             ]),
-            Expires = DateTime.UtcNow.AddMinutes(config.GetValue<int>("Jwt:TokenLifeTimeInMinutes")),
+            Expires = DateTime.UtcNow.AddMinutes(config.GetValue<int>("Jwt:TTLInMinutes")),
             SigningCredentials = credentials,
             Issuer = config["Jwt:Issuer"],
             Audience = config["Jwt:Audience"]
