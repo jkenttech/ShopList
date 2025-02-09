@@ -10,7 +10,7 @@ public class RootController : Controller
     {
         Response.StatusCode = 200;
         var jsonData = new {
-            Method = "[GET]",
+            Request.Method,
             Function = "RootController.Index()"
         };
 	    return Json(jsonData);
@@ -22,7 +22,7 @@ public class RootController : Controller
     {
         Response.StatusCode = 200;
         var jsonData = new {
-            Method = "[GET]",
+            Request.Method,
             Function = "RootController.About()"
         };
 	    return Json(jsonData);
@@ -34,7 +34,7 @@ public class RootController : Controller
     {
         Response.StatusCode = 200;
         var jsonData = new {
-            Method = "[GET]",
+            Request.Method,
             Function = "RootController.Privacy()"
         };
 	    return Json(jsonData);
@@ -46,7 +46,7 @@ public class RootController : Controller
     {
         Response.StatusCode = 200;
         var jsonData = new {
-            Method = "[GET]",
+            Request.Method,
             Function = "RootController.Contact()"
         };
 	    return Json(jsonData);
@@ -58,7 +58,7 @@ public class RootController : Controller
     {
         Response.StatusCode = 404;
         var jsonData = new {
-            Method = "[GET]",
+            Request.Method,
             Function = "RootController.FourOFour()"
         };
 	    return Json(jsonData);

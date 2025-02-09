@@ -14,7 +14,7 @@ public class RegistrationController(ShopListContext context) : Controller
     {
         Response.StatusCode = 200;
         var jsonData = new {
-            Method = "[GET]",
+            Request.Method,
             Function = "RegisterController.PostRegisterLogin()"
         };
 	    return Json(jsonData);
