@@ -1,3 +1,4 @@
 appsettings*json
+!*.Example.json
 bin/
 obj/
