@@ -1,6 +1,6 @@
 namespace API.Models;
 
-internal class Login
+public class Login
 {
     public int Id { get; init; }
 
