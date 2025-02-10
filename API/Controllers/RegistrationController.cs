@@ -1,6 +1,7 @@
 using API.Models;
 using API.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace API.Controllers;
 
@@ -11,19 +12,30 @@ public class RegistrationController(ShopListContext context) : Controller
 
     [HttpPost]
     [Route("/register")]
-    public JsonResult PostRegisterLogin(RegisterDTO postData)
+    public async Task<JsonResult> PostRegisterLogin(RegisterDTO postData)
     {
         List<string> error = [];
         int responseCode = 0;
 
         if(ModelState.IsValid)
         {
-            responseCode = 200;
-
             if(postData.Password != postData.PasswordConfirm)
             {
                 responseCode = 400;
                 error.Add("Password and PasswordConfirm do not match.");
+            }
+
+            if(error.Count == 0)
+            {
+                responseCode = 200;
+
+                Login newUser = new Login(){
+                    Email = postData.Email,
+                    PasswordHash = postData.Password
+                };
+
+                _context.Logins.Add(newUser);
+                await _context.SaveChangesAsync();
             }
         }
 
