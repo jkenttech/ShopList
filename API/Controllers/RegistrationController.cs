@@ -1,22 +1,52 @@
 using API.Models;
+using API.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace API.Controllers;
 
 public class RegistrationController(ShopListContext context) : Controller
 {
+    private readonly string _controller = "RegistrationController";
     private readonly ShopListContext _context = context;
 
     [HttpPost]
     [Route("/register")]
-    public async Task<JsonResult> PostRegisterLogin()
+    public JsonResult PostRegisterLogin(RegisterDTO postData)
     {
-        Response.StatusCode = 200;
+        List<string> error = [];
+        int responseCode = 0;
+
+        if(ModelState.IsValid)
+        {
+            responseCode = 200;
+
+            if(postData.Password != postData.PasswordConfirm)
+            {
+                responseCode = 400;
+                error.Add("Password and PasswordConfirm do not match.");
+            }
+        }
+
+        if(postData.Password == null)
+        {
+            responseCode = 400;
+            error.Add("Password is null.");
+        }
+        
+        if(postData.PasswordConfirm == null)
+        {
+            responseCode = 400;
+            error.Add("PasswordConfirm is null.");
+        }
+
+        Response.StatusCode = (responseCode == 0) ? Response.StatusCode = 418 : responseCode;
+
         var jsonData = new {
             Request.Method,
-            Function = "RegisterController.PostRegisterLogin()"
+            Function = "RegistrationController.PostRegisterLogin(Login)",
+            Error = error
         };
-	    return Json(jsonData);
+
+        return Json(jsonData);
     }
 }

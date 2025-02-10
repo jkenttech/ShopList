@@ -4,7 +4,7 @@ public class Login
 {
     public int Id { get; init; }
 
-    public string Email { get; set; } = "N/A";
+    required public string Email { get; set; }
 
-    public string PasswordHash { get; set; } = "N/A";
+    required public string PasswordHash { get; set; }
 }
