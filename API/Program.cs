@@ -1,4 +1,4 @@
-using API.Handlers;
+using API.Utilities;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +7,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<JwtTokenHandler>();
+builder.Services.AddSingleton<JwtTokenGenerator>();
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!
 .Replace("$HOST", builder.Configuration["Database:Host"])

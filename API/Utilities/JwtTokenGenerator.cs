@@ -4,9 +4,9 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using API.Models;
 
-namespace API.Handlers;
+namespace API.Utilities;
 
-internal sealed class JwtTokenHandler(IConfiguration config)
+internal sealed class JwtTokenGenerator(IConfiguration config)
 {
     public string GenerateToken(Login login)
     {
