@@ -1,5 +1,6 @@
-using API.Models;
 using API.DTOs;
+using API.Enums;
+using API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -20,24 +21,9 @@ public class RegistrationController(ShopListContext context) : Controller
         if(!ModelState.IsValid)
         {
             responseCode = 400;
-
-            if(postData.Password == null)
-                { error.Add("Password is null."); }
-            
-            if(postData.PasswordConfirm == null)
-                { error.Add("PasswordConfirm is null."); }
-            
-            if(postData.FirstName == null)
-                { error.Add("FirstName is null."); }
         }
 
-        if(postData.Password != postData.PasswordConfirm)
-        {
-            responseCode = 400;
-            error.Add("Password and PasswordConfirm do not match.");
-        }
-
-        if(error.Count == 0)
+        if(responseCode == 0)
         {
             responseCode = 200;
 
@@ -54,7 +40,7 @@ public class RegistrationController(ShopListContext context) : Controller
                 FirstName = postData.FirstName!,
                 LastName = postData.LastName,
                 ProfilePicture = postData.ProfilePicture,
-                AccountType = "user"
+                AccountType = AccountType.User
             };
             _context.Users.Add(newUser);
 
@@ -65,10 +51,11 @@ public class RegistrationController(ShopListContext context) : Controller
         // then return 418 I'M A TEAPOT
         Response.StatusCode = (responseCode == 0) ? Response.StatusCode = 418 : responseCode;
 
+        // Serialise the data into an anonymous JSON object and return
         var jsonData = new {
             Request.Method,
             Function = "RegistrationController.PostRegisterLogin(Login)",
-            Error = error
+            ModelState
         };
 
         return Json(jsonData);
