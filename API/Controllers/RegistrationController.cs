@@ -29,7 +29,7 @@ public class RegistrationController(ShopListContext context) : Controller
             {
                 responseCode = 200;
 
-                Login newUser = new Login(){
+                Login newUser = new(){
                     Email = postData.Email,
                     PasswordHash = postData.Password
                 };
