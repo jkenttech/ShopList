@@ -10,10 +10,10 @@ internal sealed class JwtTokenGenerator(IConfiguration config)
 {
     public string GenerateToken(Login login)
     {
-        SymmetricSecurityKey securtityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Secret"]!));
-        SigningCredentials credentials = new SigningCredentials(securtityKey, SecurityAlgorithms.HmacSha256);
+        SymmetricSecurityKey securtityKey = new(Encoding.UTF8.GetBytes(config["Jwt:Secret"]!));
+        SigningCredentials credentials = new(securtityKey, SecurityAlgorithms.HmacSha256);
 
-        SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+        SecurityTokenDescriptor tokenDescriptor = new()
         {
             Subject = new ClaimsIdentity(
             [
@@ -25,7 +25,7 @@ internal sealed class JwtTokenGenerator(IConfiguration config)
             Audience = config["Jwt:Audience"]
         };
 
-        JsonWebTokenHandler handler = new JsonWebTokenHandler();
+        JsonWebTokenHandler handler = new();
 
         return handler.CreateToken(tokenDescriptor);
     }
