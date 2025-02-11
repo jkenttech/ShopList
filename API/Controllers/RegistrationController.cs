@@ -2,21 +2,22 @@ using API.DTOs;
 using API.Enums;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace API.Controllers;
 
 public class RegistrationController(ShopListContext context) : Controller
 {
-    private readonly string _controller = "RegistrationController";
     private readonly ShopListContext _context = context;
     private int responseCode;
+    private readonly string _controllerName = "RegistrationController.";
+    private string? functionName;
 
     [HttpPost]
     [Route("/register")]
-    public async Task<JsonResult> PostRegisterLogin(RegisterDTO postData)
+    public async Task<JsonResult> PostRegisterUser(RegisterDTO postData)
     {
         responseCode = 0;
+        functionName = $"{_controllerName}PostRegisterUser(RegisterDTO)";
 
         if(!ModelState.IsValid)
             { responseCode = 400; }
@@ -52,7 +53,7 @@ public class RegistrationController(ShopListContext context) : Controller
         // Serialise the data into an anonymous JSON object and return
         var jsonData = new {
             Request.Method,
-            Function = "RegistrationController.PostRegisterLogin(Login)",
+            Function = functionName,
             ModelState
         };
 
