@@ -19,9 +19,7 @@ public class RegistrationController(ShopListContext context) : Controller
         responseCode = 0;
 
         if(!ModelState.IsValid)
-        {
-            responseCode = 400;
-        }
+            { responseCode = 400; }
 
         if(responseCode == 0)
         {
