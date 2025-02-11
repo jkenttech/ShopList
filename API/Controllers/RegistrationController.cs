@@ -1,7 +1,9 @@
 using API.DTOs;
 using API.Enums;
 using API.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -29,7 +31,7 @@ public class RegistrationController(ShopListContext context) : Controller
             Login newLogin = new()
             {
                 Email = postData.Email,
-                PasswordHash = postData.Password!
+                PasswordHash = postData.HashPassword(postData.Password!)
             };
             _context.Logins.Add(newLogin);
 
@@ -57,6 +59,34 @@ public class RegistrationController(ShopListContext context) : Controller
             ModelState
         };
 
+        return Json(jsonData);
+    }
+
+    // temporary method to check password hasher
+    [HttpPost]
+    [Route("/verify")]
+    public async Task<JsonResult> PostVerifyLogin(Login postData)
+    {
+        responseCode = 400;
+        functionName = $"{_controllerName}PostVerifyLogin)";
+        PasswordVerificationResult verified = PasswordVerificationResult.Failed;
+
+        Login? login = await _context.Logins.FirstOrDefaultAsync(x => x.Email == postData.Email);
+        if(login != null)
+        {
+            verified = login.VerifyPassword(postData.PasswordHash);
+        }
+        
+        if(verified == PasswordVerificationResult.Success)
+        {
+            //responseCode = 200;
+        }
+
+        var jsonData = new {
+            Request.Method,
+            Function = functionName,
+            PasswordVerified = verified
+        };
         return Json(jsonData);
     }
 }
