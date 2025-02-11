@@ -9,5 +9,5 @@ public class User : UserAbstract
 
     public string? ProfilePicture { get; set; }
 
-    required public string AccountType { get; set; }
+    public string? AccountType { get; set; }
 }

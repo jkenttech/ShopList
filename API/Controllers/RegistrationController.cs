@@ -17,40 +17,52 @@ public class RegistrationController(ShopListContext context) : Controller
         List<string> error = [];
         int responseCode = 0;
 
-        if(ModelState.IsValid)
-        {
-            if(postData.Password != postData.PasswordConfirm)
-            {
-                responseCode = 400;
-                error.Add("Password and PasswordConfirm do not match.");
-            }
-
-            if(error.Count == 0)
-            {
-                responseCode = 200;
-
-                Login newUser = new(){
-                    Email = postData.Email,
-                    PasswordHash = postData.Password
-                };
-
-                _context.Logins.Add(newUser);
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        if(postData.Password == null)
+        if(!ModelState.IsValid)
         {
             responseCode = 400;
-            error.Add("Password is null.");
-        }
-        
-        if(postData.PasswordConfirm == null)
-        {
-            responseCode = 400;
-            error.Add("PasswordConfirm is null.");
+
+            if(postData.Password == null)
+                { error.Add("Password is null."); }
+            
+            if(postData.PasswordConfirm == null)
+                { error.Add("PasswordConfirm is null."); }
+            
+            if(postData.FirstName == null)
+                { error.Add("FirstName is null."); }
         }
 
+        if(postData.Password != postData.PasswordConfirm)
+        {
+            responseCode = 400;
+            error.Add("Password and PasswordConfirm do not match.");
+        }
+
+        if(error.Count == 0)
+        {
+            responseCode = 200;
+
+            Login newLogin = new()
+            {
+                Email = postData.Email,
+                PasswordHash = postData.Password!
+            };
+            _context.Logins.Add(newLogin);
+
+            User newUser = new()
+            {
+                Email = postData.Email,
+                FirstName = postData.FirstName!,
+                LastName = postData.LastName,
+                ProfilePicture = postData.ProfilePicture,
+                AccountType = "user"
+            };
+            _context.Users.Add(newUser);
+
+            await _context.SaveChangesAsync();
+        }
+
+        // If there is an unknown error and the response code hasn't been set
+        // then return 418 I'M A TEAPOT
         Response.StatusCode = (responseCode == 0) ? Response.StatusCode = 418 : responseCode;
 
         var jsonData = new {
