@@ -10,13 +10,13 @@ public class RegistrationController(ShopListContext context) : Controller
 {
     private readonly string _controller = "RegistrationController";
     private readonly ShopListContext _context = context;
+    private int responseCode;
 
     [HttpPost]
     [Route("/register")]
     public async Task<JsonResult> PostRegisterLogin(RegisterDTO postData)
     {
-        List<string> error = [];
-        int responseCode = 0;
+        responseCode = 0;
 
         if(!ModelState.IsValid)
         {
