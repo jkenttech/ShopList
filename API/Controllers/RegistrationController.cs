@@ -67,8 +67,9 @@ public class RegistrationController(ShopListContext context) : Controller
     [Route("/verify")]
     public async Task<JsonResult> PostVerifyLogin(Login postData)
     {
-        responseCode = 400;
-        functionName = $"{_controllerName}PostVerifyLogin)";
+        responseCode = 401;
+        Console.WriteLine($"response code is {responseCode}");
+        functionName = $"{_controllerName}PostVerifyLogin(Login)";
         PasswordVerificationResult verified = PasswordVerificationResult.Failed;
 
         Login? login = await _context.Logins.FirstOrDefaultAsync(x => x.Email == postData.Email);
@@ -79,14 +80,17 @@ public class RegistrationController(ShopListContext context) : Controller
         
         if(verified == PasswordVerificationResult.Success)
         {
-            //responseCode = 200;
+            responseCode = 200;
         }
+
+        Response.StatusCode = (responseCode == 0) ? Response.StatusCode = 418 : responseCode;
 
         var jsonData = new {
             Request.Method,
             Function = functionName,
             PasswordVerified = verified
         };
+
         return Json(jsonData);
     }
 }
