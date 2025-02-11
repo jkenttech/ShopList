@@ -1,3 +1,4 @@
+using API.Abstracts;
 namespace API.Models;
 
 public class User : UserAbstract
@@ -9,11 +10,4 @@ public class User : UserAbstract
     public string? ProfilePicture { get; set; }
 
     required public string AccountType { get; set; }
-}
-
-public abstract class UserAbstract
-{
-    public int Id { get; init; }
-
-    required public string Email { get; set; }
 }

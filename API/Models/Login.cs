@@ -1,3 +1,4 @@
+using API.Abstracts;
 namespace API.Models;
 
 public class Login : UserAbstract

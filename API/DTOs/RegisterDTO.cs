@@ -1,5 +1,4 @@
-using API.Models;
-
+using API.Abstracts;
 namespace API.DTOs;
 
 public class RegisterDTO : UserAbstract
