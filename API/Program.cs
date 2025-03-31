@@ -19,6 +19,15 @@ builder.Services.AddDbContext<ShopListContext>(
     options => options.UseNpgsql(connectionString)
 );
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: builder.Configuration["CORS:Policy"]!,
+    policy => 
+    {
+        policy.WithOrigins(builder.Configuration["CORS:Urls"]!);
+    });
+});
+
 WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -26,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(builder.Configuration["CORS:Policy"]!);
 
 // app.UseHttpsRedirection();
 app.MapControllerRoute(
